@@ -1,0 +1,8 @@
+alice:x:1001:1001::/home/alice:/bin/bash
+bob:x:1002:1002::/home/bob:/bin/bash
+carol:x:1003:1003::/home/carol:/bin/bash
+dave:x:1004:1001::/home/dave:/bin/bash
+uid=1001(alice) gid=1001(dev) groups=1001(dev)
+uid=1002(bob) gid=1002(ops) groups=1002(ops),1001(dev)
+uid=1003(carol) gid=1003(audit) groups=1003(audit)
+uid=1004(dave) gid=1001(dev) groups=1001(dev),1002(ops)
