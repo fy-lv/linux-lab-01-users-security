@@ -1,7 +1,7 @@
 # Linux Lab 01 – Users & Security
 
 Laboratorio práctico para configurar un sistema Linux básico en un entorno multiusuario aplicando buenas prácticas de seguridad:
-usuarios/grupos, políticas de contraseña, sudo restringido y defaults con `/etc/skel`. :contentReference[oaicite:1]{index=1}
+usuarios/grupos, políticas de contraseña, sudo restringido y defaults con `/etc/skel`.  
 
 ---
 
@@ -11,13 +11,12 @@ Configurar un sistema Linux para un entorno multiusuario aplicando:
 - **Usuarios y grupos**
 - **Políticas de contraseñas / expiración**
 - **Sudo restringido (mínimo privilegio)**
-- **Configuración por defecto para nuevos usuarios con `/etc/skel`** :contentReference[oaicite:2]{index=2}
-
+- **Configuración por defecto para nuevos usuarios con `/etc/skel`** 
 ---
 
 ## Escenario
 
-Servidor Linux sin políticas de usuarios, grupos ni control de privilegios. :contentReference[oaicite:3]{index=3}
+Servidor Linux sin políticas de usuarios, grupos ni control de privilegios. 
 
 ---
 
@@ -56,7 +55,7 @@ Este lab usa valores **consistentes**. Si cambias algo, cámbialo también en `c
 
 - `commands/` → scripts del lab (ejecución)
 - `evidence/` → outputs reales de verificación (prueba)
-- `README.md` → guía (explicación) :contentReference[oaicite:4]{index=4}
+- `README.md` → guía (explicación) 
 
 ---
 
