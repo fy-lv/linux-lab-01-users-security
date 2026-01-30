@@ -1,48 +1,68 @@
 # Linux Lab 01 – Users & Security
 
-## Objetivo
-Configurar un sistema Linux para un entorno multiusuario aplicando buenas prácticas:
-- usuarios y grupos
-- políticas de contraseña / expiración
-- sudo restringido (mínimo privilegio)
-- configuración por defecto con /etc/skel
+Laboratorio práctico para configurar un sistema Linux básico en un entorno multiusuario aplicando buenas prácticas de seguridad:
+usuarios/grupos, políticas de contraseña, sudo restringido y defaults con `/etc/skel`. :contentReference[oaicite:1]{index=1}
 
-## Entorno / prerequisitos
-- Linux (indicar distro y versión)
-- Acceso root o usuario con sudo
-- Recomendado: VM con snapshot antes de empezar
+---
+
+## Objetivo
+
+Configurar un sistema Linux para un entorno multiusuario aplicando:
+- **Usuarios y grupos**
+- **Políticas de contraseñas / expiración**
+- **Sudo restringido (mínimo privilegio)**
+- **Configuración por defecto para nuevos usuarios con `/etc/skel`** :contentReference[oaicite:2]{index=2}
+
+---
 
 ## Escenario
-Servidor Linux sin políticas de usuarios, grupos ni control de privilegios. :contentReference[oaicite:5]{index=5}
 
-## Pasos
+Servidor Linux sin políticas de usuarios, grupos ni control de privilegios. :contentReference[oaicite:3]{index=3}
 
-### 1) Crear grupos y usuarios
-**Comandos**
+---
+
+## Prerequisitos
+
+- Linux (Debian/Ubuntu/RHEL-like). Recomendado en VM con snapshot.
+- Acceso `root` o un usuario con `sudo`.
+- Paquetes típicos ya instalados (coreutils, passwd/shadow utils, sudo).
+
+> Nota: este lab **modifica usuarios/grupos y sudoers**. Hazlo en un entorno de laboratorio.
+
+---
+
+## Convenciones del lab (para que sea reproducible)
+
+Este lab usa valores **consistentes**. Si cambias algo, cámbialo también en `commands/` y en el README.
+
+### Usuarios / grupos usados
+- Grupo: `secops`
+- Usuarios: `user1`, `user2`
+
+### Política de expiración (ejemplo recomendado)
+- Expiración máxima: **90 días**
+- Mínimo: **7 días**
+- Warning: **14 días**
+
+### Sudo restringido (ejemplo recomendado)
+- El grupo `secops` podrá ejecutar **solo**:
+  - `systemctl status`
+  - `journalctl`
+- Sin acceso a “ALL” ni a shells.
+
+---
+
+## Estructura del repositorio
+
+- `commands/` → scripts del lab (ejecución)
+- `evidence/` → outputs reales de verificación (prueba)
+- `README.md` → guía (explicación) :contentReference[oaicite:4]{index=4}
+
+---
+
+## Ejecución
+
+### Opción A — Ejecutar todo (recomendado)
 ```bash
-# ejemplos (ajustar a tu caso)
-sudo groupadd secops
-sudo useradd -m -s /bin/bash user1
-sudo usermod -aG secops user1
-
-getent group secops
-id user1
-
-# ejemplo:
-sudo chage -M 90 -m 7 -W 14 user1
-
-chage -l user1
-
-sudo visudo -f /etc/sudoers.d/user1-lab01
-# ejemplo dentro:
-# user1 ALL=(ALL) NOPASSWD: /usr/bin/systemctl status, /usr/bin/journalctl
-
-sudo -l -U user1
-
-# ejemplo:
-sudo ls -la /etc/skel
-# agregar .bashrc, aliases, etc...
-
-# crear user2 y verificar que hereda
-sudo useradd -m -s /bin/bash user2
-sudo -u user2 ls -la ~
+cd commands
+sudo bash 00_run_all.sh
