@@ -1,69 +1,42 @@
 # Linux Lab 01 – Users & Security
 
-Laboratorio práctico para configurar un sistema Linux básico en un entorno multiusuario aplicando buenas prácticas de seguridad:
-usuarios/grupos, políticas de contraseña, sudo restringido y defaults con `/etc/skel`.  
+## 📌 Objetivo
+Configurar un sistema Linux básico para entorno multiusuario aplicando buenas prácticas de seguridad: gestión de usuarios, grupos, contraseñas y sudo. :contentReference[oaicite:1]{index=1}
 
 ---
 
-## Objetivo
-
-Configurar un sistema Linux para un entorno multiusuario aplicando:
-- **Usuarios y grupos**
-- **Políticas de contraseñas / expiración**
-- **Sudo restringido (mínimo privilegio)**
-- **Configuración por defecto para nuevos usuarios con `/etc/skel`**
-  
----
-
-## Escenario
-
-Servidor Linux sin políticas de usuarios, grupos ni control de privilegios. 
+## 🧩 Escenario
+Un servidor Linux sin políticas definidas de usuarios, grupos ni control de privilegios. :contentReference[oaicite:2]{index=2}
 
 ---
 
-## Prerequisitos
-
-- Linux (Debian/Ubuntu/RHEL-like). Recomendado en VM con snapshot.
-- Acceso `root` o un usuario con `sudo`.
-- Paquetes típicos ya instalados (coreutils, passwd/shadow utils, sudo).
-
-> Nota: este lab **modifica usuarios/grupos y sudoers**. Hazlo en un entorno de laboratorio.
+## 📋 Alcance del laboratorio
+- Crear usuarios y grupos.
+- Configurar políticas de contraseñas.
+- Restringir uso de `sudo`.
+- Usar `/etc/skel` para configuración por defecto. :contentReference[oaicite:3]{index=3}
 
 ---
 
-## Convenciones del lab (para que sea reproducible)
+## 🛠️ Comandos utilizados
 
-Este lab usa valores **consistentes**. Si cambias algo, cámbialo también en `commands/` y en el README.
+> Lista completa en el archivo **commands**
 
-### Usuarios / grupos usados
-- Grupo: `secops`
-- Usuarios: `user1`, `user2`
-
-### Política de expiración (ejemplo recomendado)
-- Expiración máxima: **90 días**
-- Mínimo: **7 días**
-- Warning: **14 días**
-
-### Sudo restringido (ejemplo recomendado)
-- El grupo `secops` podrá ejecutar **solo**:
-  - `systemctl status`
-  - `journalctl`
-- Sin acceso a “ALL” ni a shells.
-
----
-
-## Estructura del repositorio
-
-- `commands/` → scripts del lab (ejecución)
-- `evidence/` → outputs reales de verificación (prueba)
-- `README.md` → guía (explicación) 
-
----
-
-## Ejecución
-
-### Opción A — Ejecutar todo (recomendado)
+Ejemplos:
 ```bash
-cd commands
-sudo bash 00_run_all.sh
-```
+# Crear grupo
+sudo groupadd developers
+
+# Añadir usuario con grupo principal
+sudo useradd -m -G developers username
+
+# Revisar usuario y grupo
+getent passwd
+getent group
+
+sudo chage -l username
+sudo chage -m 1 -M 90 -W 7 username
+
+sudo visudo
+# permitir solo comandos específicos por usuario/grupo
+
