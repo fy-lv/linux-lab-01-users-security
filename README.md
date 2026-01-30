@@ -11,7 +11,8 @@ Configurar un sistema Linux para un entorno multiusuario aplicando:
 - **Usuarios y grupos**
 - **Políticas de contraseñas / expiración**
 - **Sudo restringido (mínimo privilegio)**
-- **Configuración por defecto para nuevos usuarios con `/etc/skel`** 
+- **Configuración por defecto para nuevos usuarios con `/etc/skel`**
+  
 ---
 
 ## Escenario
