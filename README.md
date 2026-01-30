@@ -65,3 +65,4 @@ Este lab usa valores **consistentes**. Si cambias algo, cámbialo también en `c
 ```bash
 cd commands
 sudo bash 00_run_all.sh
+```
